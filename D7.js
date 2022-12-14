@@ -37,37 +37,37 @@ function giveMeRandom() {
 
 console.log("\nEsercizio 3\n");
 
-let somma = 0;
-const arrayNum = (5, 4, 9, 12, 45, 6);
+const num1 = [17, 5, 2, 2, 14, 8];
 function pari() {
-  for (let i = 0; i < arrayNum.length; i++) {
-    if (arrayNum[i] % 2 != 0) somma = somma + arrayNum[i];
-  }
-  console.log(somma);
+  const pari2 = num1.filter((numeroSingolo) => {
+    return numeroSingolo % 2 === 0;
+  });
+  console.log(pari2);
 }
-// pari();
+
+pari();
 //no
 
 /* ESERCIZIO 4
   Scrivi una funzione per sommare i numeri contenuti in un array
 */
 console.log("\nEsercizio 4\n");
-somma = 0;
-const num = [8, 5, 92, 12, 45, 6];
-function sum() {
-  for (let i = 0; i < num.length; i++) {
-    if (num[i] % 2 == 0) {
-      somma = num[i];
-      somma += somma;
-      // console.log(somma);
-    }
-    return somma;
-  }
-  console.log(somma);
-}
+const num = [7, 5, 2, 2, 15, 8];
+let somma = num.reduce((temp, singleNum) => {
+  return temp + singleNum;
+}, 0);
+console.log(somma);
+
+// // function sum() {
+// //   for (let i = 0; i < num.length; i++) {
+// //     if (num[i] % 2 == 0) {
+// //       somma += num[i];
+// //     } else somma += 0;
+// //   }
+// //   console.log(somma);
+// // }
 
 // sum();
-//no
 
 /* ESERCIZIO 5
   Scrivi una funzione per sommare i numeri contenuti in un array (usare REDUCE)
@@ -88,6 +88,12 @@ function add() {
   Scrivi una funzione che, dato un array di soli numeri e un numero n come parametri, ritorni un secondo array con tutti i valori del precedente incrementati di n
 */
 
+const incrementaArray = (array, n) => {
+  return array.map((el) => el + n);
+};
+
+console.log(incrementaArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 30));
+
 /* ESERCIZIO 8
   Scrivi una funzione che, dato un array di stringhe, ritorni un nuovo array contenente le lunghezze delle rispettive stringhe dell'array di partenza
   es.: ["EPICODE", "is", "great"] => [7, 2, 5]
@@ -101,15 +107,15 @@ console.log("\nEsercizio 9\n");
 
 nDispari = [];
 function dispari() {
-  for (let i = 0; i < 100; i++) {
-    if (i % 2 != 0) {
-      nDispari[i] = i;
-    } else console.log(" ");
+  for (let n = 0; n < 100; n++) {
+    if (n % 2 != 0) {
+      nDispari[n] = n;
+    } else nDispari[n] = [""];
   }
   console.log(nDispari);
 }
 
-// dispari();
+dispari();
 
 /* Questo array di film verrà usato negli esercizi a seguire. Non modificarlo e scorri oltre per riprendere gli esercizi :) */
 const movies = [
@@ -230,18 +236,38 @@ const movies = [
 /* ESERCIZIO 10
   Scrivi una funzione per trovare il film più vecchio nell'array fornito.
 */
+console.log("\nEsercizio 10\n");
+anno = 0;
+let years = movies.map((movies) => parseInt(movies.Year)); //array di stringhe di anni
+// console.log(years);
+
+let foundYear = 2001;
+let fooudIndex = 0;
+
+for (let i = 0; i < years.length; i++) {
+  const currYears = years[i];
+  if (currYears < foundYear) {
+    foundYear = currYears;
+    foundIndex = i;
+  }
+}
+console.log(
+  "il film piu vecchio è : " + movies[fooudIndex].Title + " del " + foundYear
+);
+
+// years.sort();
+// console.log(years[0]);
 
 /* ESERCIZIO 11
   Scrivi una funzione per ottenere il numero di film contenuti nell'array fornito.
 */
 console.log("\nEsercizio 11\n");
 
-conta = 0;
-nFilm = 0;
-function numeroFilm() {
-  conta = movies.length;
-  console.log(conta);
-}
+const countMovies = (array) => {
+  return array.length;
+};
+
+console.log(countMovies(movies));
 
 // numeroFilm();
 
@@ -273,13 +299,14 @@ prima2000 = 0;
 function dueMila() {
   for (let i = 0; i < movies.length; i++) {
     data = parseInt(movies[i].Year);
-    if (data >= 2000) filmDueMila[i] = movies[i].Title;
+    if (data >= 2000) filmDueMila.push(movies[i].Title);
     else prima2000++;
   }
   console.log(filmDueMila);
   console.log("Film prima del 2000: " + prima2000);
 }
 
+console.log(dueMila(movies));
 // dueMila();
 
 /* ESERCIZIO 14
